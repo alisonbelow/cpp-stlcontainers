@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.com/alisonbelow/cpp-stlcontainers.svg?branch=master)](https://travis-ci.com/alisonbelow/cpp-stlcontainers)  
-[![Coverage Status](https://coveralls.io/repos/github/alisonbelow/cpp-stlcontainers/badge.svg?branch=master)](https://coveralls.io/github/alisonbelow/cpp-stlcontainers?branch=master)  
+[![Build Status](https://travis-ci.com/alisonbelow/cpp-stlcontainers.svg?branch=master)](https://travis-ci.com/alisonbelow/cpp-stlcontainers) [![Coverage Status](https://coveralls.io/repos/github/alisonbelow/cpp-stlcontainers/badge.svg?branch=master)](https://coveralls.io/github/alisonbelow/cpp-stlcontainers?branch=master)  
 
 # C++ STL Containers
 
