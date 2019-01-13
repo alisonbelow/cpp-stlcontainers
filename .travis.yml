@@ -26,7 +26,12 @@ script:
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
   # Build the code and run
-  - sh project.sh test
+  - mkdir -p build
+  - cd build
+  - cmake ..
+  - make
+  - cd ..
+  - ./build/bin/cpp-stlcontainer_unittests
 
 after_success:
   - coveralls --root .. -E ".*external.*" -E ".*googletest.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
