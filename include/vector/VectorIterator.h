@@ -11,10 +11,6 @@ namespace stlcontainer {
             const VectorType*,                  // pointer
             const VectorType&>                  // reference
     {
-        private:
-            VectorType* _start_elem;
-            size_t _index;
-
         public:
             // Constructor
             explicit VectorIterator(VectorType* elem = nullptr, size_t index = 0) : _start_elem(elem), _index(index) {};
@@ -66,7 +62,7 @@ namespace stlcontainer {
 
             bool operator !=(const VectorIterator& rhs) const 
             {
-                return (_start_elem == rhs._start_elem) || (_index == rhs._index);
+                return !(this == rhs);
             };
 
             // Arithmetic operators
@@ -94,17 +90,17 @@ namespace stlcontainer {
 
             bool operator>(const VectorIterator& other) 
             {
-                return _index > other._index;
+                return other._index < _index;
             };
 
             bool operator<=(const VectorIterator& other) 
             {   
-                return (*this < other) || (*this == other);    
+                return !(other._index < _index);    
             };
 
             bool operator>=(const VectorIterator& other) 
             {
-                return (*this > other) || (*this == other);
+                return !(_index < other._index);
             };
 
             // Compound assignment operators
@@ -119,6 +115,10 @@ namespace stlcontainer {
                 this->_index -= step;
                 return *this;
             };    
+    
+        private:
+            VectorType* _start_elem;
+            size_t _index;
     };
 
 }   // namespace stlcontainer

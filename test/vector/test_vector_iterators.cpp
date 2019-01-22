@@ -1,7 +1,7 @@
 #include <vector>
 
 #include <gtest/gtest.h>
-#include <vector/VectorIterator.h>
+#include "vector/VectorIterator.h"
 
 
 TEST(VECTOR_ITER, EMPTY_CREATION)
@@ -15,7 +15,22 @@ TEST(VECTOR_ITER, POPULATED_CREATION)
     stlcontainer::VectorIterator<int> vec_iter(&v[0], 0);
 
     ASSERT_EQ(*vec_iter, v[0]);
+}
+
+TEST(VECTOR_ITER, EQUALS_OPERATOR)
+{
+    std::vector<int> v = {1,2,5,4};
+    stlcontainer::VectorIterator<int> vec_iter(&v[0], 0);
+
     ASSERT_TRUE(*vec_iter == v[0]);
+}
+
+TEST(VECTOR_ITER, DOES_NOT_EQUAL_OPERATOR)
+{
+    std::vector<int> v = {1,2,5,4};
+    stlcontainer::VectorIterator<int> vec_iter(&v[0], 0);
+
+    ASSERT_TRUE(*vec_iter != v[2]);
 }
 
 TEST(VECTOR_ITER, PREINCREMENT)
@@ -61,4 +76,17 @@ TEST(VECTOR_ITER, COMPOUND_ASSIGNMENT_OPS)
 
     vec_iter += 4;
     ASSERT_EQ(*(vec_iter), v[4]);
+}
+
+TEST(VECTOR_ITER, RELATIONAL_OPERATORS)
+{
+    std::vector<int> v = {1,2,5,4};
+    stlcontainer::VectorIterator<int> vec_iter(&v[0], 0);
+
+    ASSERT_FALSE(*vec_iter >= v[2]);
+    ASSERT_TRUE(*vec_iter >= v[0]);
+    ASSERT_FALSE(*vec_iter > v[2]);
+    ASSERT_TRUE(*vec_iter <= v[2]);
+    ASSERT_TRUE(*vec_iter <= v[0]);
+    ASSERT_TRUE(*vec_iter < v[2]);
 }
