@@ -92,13 +92,14 @@ Random Access:
 
 ### References
 
-http://znc.es/Addison%20Wesley%20-%20The%20%20C++%20Standard%20Library.%20A%20Tutorial%20and%20Reference.pdf 
+http://znc.es/Addison%20Wesley%20-%20The%20%20C++%20Standard%20Library.%20A%20Tutorial%20and%20Reference.pdf  
 https://www.rapidtables.com/math/symbols/Set_Symbols.html  
 https://en.cppreference.com/w/cpp/iterator  
 https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator  
 http://www.cplusplus.com/reference/iterator/  
 https://stackoverflow.com/questions/1303899/performance-difference-between-iterator-and-iterator  
-http://www.cplusplus.com/reference/iterator/reverse_iterator/operator++/
-https://accu.org/index.php/journals/479
+http://www.cplusplus.com/reference/iterator/reverse_iterator/operator++/  
+https://accu.org/index.php/journals/479  
+http://read.pudn.com/downloads70/ebook/250637/STL.Tutorial.and.Reference.Guide/Addison-Wesley%20-%20STL%20Tutorial%20and%20Reference%20Guide.pdf  
 
 <br><br><br>*NOTE all documentation assuming C++ 17 standard*

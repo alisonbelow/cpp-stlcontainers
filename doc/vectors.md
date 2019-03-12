@@ -459,7 +459,7 @@ template <class T, class Alloc>
     bool std::vector::operator< (const std::vector<T, Alloc>& lhs, const std::vector<T, Alloc>&rhs);
 ```
 
-Vector elements are compared lexiographically, checking that contents of `lhs` are less than the contents of `rhs`. Complexity is linear up to the smaller `size` between `lhs` and `rhs`.  
+Vector elements are compared lexiographically, checking that contents of `lhs` are less than the contents of `rhs`. Complexity is linear in size of vector.
 
 
 ```cpp
@@ -489,12 +489,13 @@ Complexity for remaining operators is linear up to the smaller `size` between `l
 
 ### References
 
-https://en.cppreference.com/w/cpp/container/vector
-https://en.cppreference.com/w/cpp/named_req/CopyAssignable
-https://en.cppreference.com/w/cpp/named_req/CopyConstructible
-http://john-ahlgren.blogspot.com/2013/10/stl-container-performance.html
-https://www.bfilipek.com/2014/05/vector-of-objects-vs-vector-of-pointers.html-
-http://www.cplusplus.com/reference/vector/vector/vector/
-https://www.codeguru.com/cpp/cpp/cpp_mfc/stl/article.php/c4027/C-Tutorial-A-Beginners-Guide-to-stdvector-Part-1.htm
+https://en.cppreference.com/w/cpp/container/vector  
+https://en.cppreference.com/w/cpp/named_req/CopyAssignable  
+https://en.cppreference.com/w/cpp/named_req/CopyConstructible  
+http://john-ahlgren.blogspot.com/2013/10/stl-container-performance.html  
+https://www.bfilipek.com/2014/05/vector-of-objects-vs-vector-of-pointers.html-  
+http://www.cplusplus.com/reference/vector/vector/vector/  
+https://www.codeguru.com/cpp/cpp/cpp_mfc/stl/article.php/c4027/C-Tutorial-A-Beginners-Guide-to-stdvector-Part-1.htm  
+http://read.pudn.com/downloads70/ebook/250637/STL.Tutorial.and.Reference.Guide/Addison-Wesley%20-%20STL%20Tutorial%20and%20Reference%20Guide.pdf  
 
 <br><br><br>*NOTE all documentation assuming C++ 17 standard*
