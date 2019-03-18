@@ -143,7 +143,6 @@ TEST(VECTOR, MOVE_ASSIGNMENT)
     {
         ASSERT_EQ(vec[index], compareVec[index]);
     }
-
 }
 
 TEST(VECTOR, INIT_LIST_ASSIGNMENT)

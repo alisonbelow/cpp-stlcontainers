@@ -16,7 +16,7 @@ Insertion/Removal of elements at end: O(1)
 Insertion/Removal of elements, other: O(n)  
 Access: O(1)  
 
-### Constructors/Destructors
+### Member Functions
 
 #### Constructors
 
@@ -82,8 +82,6 @@ Destructors of elements are called. Used storage is deallocated. If vector of po
 
 Complexity = linear in size of container
 
-### Member Functions
-
 #### std::vector::operator=  
 
 Assigns values to the container. Has both copy assignment and move assignment operator, as well third operator that uses initializer list input.  
@@ -142,7 +140,7 @@ Syntax:
 void assign(std::initializer_list<T> ilist);
 ```  
 
-### Element Access
+### Member Functions: Element Access
 
 #### std::vector::at
 
@@ -199,7 +197,7 @@ T* std::vector::data() noexcept;
 const T* std::vector::data() const noexcept;
 ```
 
-### Iterators
+### Member Functions: Iterators
 
 Different types of iterators, std::vector uses *RandomAccessIterator*. This is necessary because it enables the O(1) access that many vector operations/functions require.  
 
@@ -256,7 +254,7 @@ const_iterator std::vector::rend() const noexcept;
 const_iterator std::vector::crend() const noexcept;
 ```
 
-### Capacity
+### Member Functions: Capacity
 
 #### std::vector::empty
 
@@ -314,7 +312,7 @@ You can then use `push_back` to add elements to the vector.
 void std::vector::shrink_to_fit();
 ```
 
-### Modifiers
+### Member Functions: Modifiers
 
 #### std::vector::clear
 

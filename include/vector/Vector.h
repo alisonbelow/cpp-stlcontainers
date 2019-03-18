@@ -94,7 +94,6 @@ namespace stlcontainer {
                 _count = other._count;
                 _capacity = other._capacity;
 
-                // other.clear() ?   
                 other._elements = nullptr;
                 other._count = 0;
                 other._capacity = 0;
