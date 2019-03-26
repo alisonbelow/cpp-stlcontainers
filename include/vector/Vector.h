@@ -27,7 +27,7 @@ namespace stlcontainer {
         // Fill constructor
         explicit Vector(size_t count = 0, const VectorDataType& value = value_type{}): _count(0), _capacity(0) 
         {
-            reserve(count + 1);
+            reserve( count == 0 ? 1 : count);
             for (auto index = 0; index < count; ++index )
             {
                 _elements[index] = value;
@@ -59,7 +59,7 @@ namespace stlcontainer {
         // Initializer list constructor
         Vector(std::initializer_list<VectorDataType> initList ): _count(0), _capacity(0) 
         {
-            reserve(initList.size() + 1);
+            reserve(initList.size());
             std::uninitialized_copy(initList.begin(), initList.end(), _elements);
             _count = initList.size();
         }
@@ -104,7 +104,7 @@ namespace stlcontainer {
         // Member functions
         Vector& operator=(std::initializer_list<VectorDataType> initList) 
         {
-            reserve(initList.size() + 1);
+            reserve(initList.size());
 
             // Reassign data to initList
             std::uninitialized_copy(initList.begin(), initList.end(), _elements);
@@ -115,7 +115,7 @@ namespace stlcontainer {
         {
             clear();
 
-            reserve(count + 1);
+            reserve(count);
             for (auto index = 0; index < count; ++index )
             {
                 _elements[index] = value;
@@ -128,7 +128,7 @@ namespace stlcontainer {
         void assign(std::initializer_list<VectorDataType> initList) 
         {
             clear(); 
-            reserve(initList.size() + 1);
+            reserve(initList.size());
             std::uninitialized_copy(initList.begin(), initList.end(), _elements);
             _count = initList.size();
         }
@@ -253,7 +253,7 @@ namespace stlcontainer {
                 delete[] _elements;
             }    
 
-            _capacity = new_capacity - 1;
+            _capacity = new_capacity;
             _elements = new_elem;
         }
 
@@ -273,7 +273,7 @@ namespace stlcontainer {
         {
             if (capacity() < size() + 1) 
             {
-                reserve( size() == 0 ? INITIAL_CAPACITY : capacity() * 2);
+                reserve( size() == 0 ? 1 : capacity() * 2);
             }
             _elements[_count++] = val;
         }
@@ -282,7 +282,7 @@ namespace stlcontainer {
         {
             if (capacity() < size() + 1) 
             {
-                reserve( size() == 0 ? INITIAL_CAPACITY : capacity() * 2);
+                reserve( size() == 0 ? 1 : capacity() * 2);
             }
             _elements[_count++] = val;
         }

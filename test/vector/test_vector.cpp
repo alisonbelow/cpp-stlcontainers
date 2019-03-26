@@ -16,19 +16,26 @@ TEST(VECTOR, EMPTY_CREATION)
 // ------------------------------------------------------------------
 TEST(VECTOR, FILL_CONSTRUCTOR)
 {
-    stlcontainer::Vector<int> vec_zeroes(5);
-    ASSERT_TRUE(vec_zeroes.size() == 5);
-    ASSERT_TRUE(vec_zeroes[0] == 0);
-    ASSERT_TRUE(vec_zeroes.capacity() >= vec_zeroes.size());
-   
-    stlcontainer::Vector<int> vec_fours(10, 4);
-    ASSERT_TRUE(vec_fours.size() == 10);
-    for (auto index = 0; index < vec_fours.size(); ++index)
-    {
-        ASSERT_TRUE(vec_fours[index] == 4);
-    }
-    ASSERT_TRUE(vec_fours.capacity() >= vec_fours.size());
+    stlcontainer::Vector<int> vecZeroes(5);
+    ASSERT_TRUE(vecZeroes.size() == 5);
+    ASSERT_TRUE(vecZeroes[0] == 0);
+    ASSERT_TRUE(vecZeroes.capacity() >= vecZeroes.size());
+    
+    std::vector<int> compareVecZeroes(5);
+    ASSERT_EQ(vecZeroes.size(), compareVecZeroes.size());
+    ASSERT_EQ(vecZeroes.capacity(), compareVecZeroes.capacity());
 
+    stlcontainer::Vector<int> vecFours(10, 4);
+    ASSERT_TRUE(vecFours.size() == 10);
+    for (auto index = 0; index < vecFours.size(); ++index)
+    {
+        ASSERT_TRUE(vecFours[index] == 4);
+    }
+    ASSERT_TRUE(vecFours.capacity() >= vecFours.size());
+
+    std::vector<int> compareVecFours(10, 4);
+    ASSERT_EQ(vecFours.capacity(), compareVecFours.capacity());
+    ASSERT_EQ(vecFours.size(), compareVecFours.size());
 }
 
 TEST(VECTOR, COPY_CONSTRUCTOR)
@@ -52,7 +59,8 @@ TEST(VECTOR, INITIALIZER_LIST_CONSTRUCTOR)
         ASSERT_EQ(vec[index], compareVec[index]);
     }
 
-    ASSERT_EQ(vec.capacity(), vec.size());
+    ASSERT_EQ(vec.capacity(), compareVec.capacity());
+    ASSERT_EQ(vec.size(), compareVec.size());
 }
 
 TEST(VECTOR, ITERATOR)
@@ -61,7 +69,6 @@ TEST(VECTOR, ITERATOR)
 
     // begin() and end()
     ASSERT_EQ(3, *vec.begin());
-    ASSERT_NE(1, *vec.end());
 
     // Arithmetic operators
     ASSERT_EQ(5, *(vec.begin()+1));
@@ -186,7 +193,7 @@ TEST(VECTOR, FRONT_AND_BACK)
 // ------------------------------------------------------------------
 // Modifiers
 // ------------------------------------------------------------------
-int return_zero_elem(int* elems)
+/*int return_zero_elem(int* elems)
 {
     return elems[0];
 }
@@ -203,16 +210,35 @@ TEST(VECTOR, CLEAR_AND_EMPTY)
     // Should seg fault
     auto elems = vec.data();
     ASSERT_EXIT(return_zero_elem(elems), ::testing::KilledBySignal(SIGSEGV), ".*");
-}
+}*/
 
 TEST(VECTOR, PUSH_BACK)
 {
     stlcontainer::Vector<int> vec;
+    std::cout << "cap = " << vec.capacity() << ", push back 3\n";
     vec.push_back(3);
+    std::cout << "cap = " << vec.capacity() << ", push back 5\n";
     vec.push_back(5);
+    std::cout << "cap = " << vec.capacity() << ", push back 6\n";
     vec.push_back(6);
+    std::cout << "cap = " << vec.capacity() << ", push back 7\n";
     vec.push_back(7);
+    std::cout << "cap = " << vec.capacity() << ", push back 1\n";
     vec.push_back(1);
+    std::cout << "cap = " << vec.capacity() << "\n";
+
+    std::vector<int> temp;
+    std::cout << "cap = " << temp.capacity() << ", push back 3\n";
+    temp.push_back(3);
+    std::cout << "cap = " << temp.capacity() << ", push back 5\n";
+    temp.push_back(5);
+    std::cout << "cap = " << temp.capacity() << ", push back 6\n";
+    temp.push_back(6);
+    std::cout << "cap = " << temp.capacity() << ", push back 7\n";
+    temp.push_back(7);
+    std::cout << "cap = " << temp.capacity() << ", push back 1\n";
+    temp.push_back(1);
+    std::cout << "cap = " << temp.capacity() << "\n";
 
     std::vector<int> compareVec({3,5,6,7,1});
 
