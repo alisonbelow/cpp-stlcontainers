@@ -26,7 +26,7 @@ std::string( const std::string& other );
 std::string( std::string&& other ) noexcept;
 ```
 
-(4) Substring Constructor: Copies portion of `other` that begins at character position `pos` and spans `len` characters (or until end of `other`)
+(4) Substring Constructor: Copies portion of `other` that begins at character position `pos` and spans `count` characters (or until end of `other`)
 
 ```cpp
 std::string( const std::string& other, size_t pos, size_t count = npos );
@@ -456,7 +456,7 @@ Finds first substring equal to given character sequence. Search begins as pos. P
 size_t find(const std::string& str, size_t pos = 0) const noexcept;
 
 // (2) Finds first substring equal to range [s, s+count)
-size_t find(const char* s, size_t pos, size_count) const;
+size_t find(const char* s, size_t pos, size_t count) const;
 
 // (3) Finds first substring equal to char string pointed to by s
 size_t find(const char* s, size_t pos = 0) const;
@@ -548,7 +548,7 @@ Compares contents of string with another string or null-terminated character arr
 
 #### std::string::operator <<
 
-Inserts sequence of characters that conforms value of `str` into `os`. Overloads operator `<<`. Complexity linear in length of `str`. 
+Inserts sequence of characters that conforms value of `str` into `os`. Overloads operator `<<`. Complexity linear in length of `str`.
 
 ```cpp
 std::ostream& operator<<(std::ostream& os, const std::string& str)
@@ -556,7 +556,7 @@ std::ostream& operator<<(std::ostream& os, const std::string& str)
 
 #### std::string::operator >>
 
-Extracts string from input stream `is`, storing the sequence in `str`, which is overwritten. Each extracted character is appended to string as if `push_back` used. Overloads operator `>>`. Complexity linear in length of `str`. 
+Extracts string from input stream `is`, storing the sequence in `str`, which is overwritten. Each extracted character is appended to string as if `push_back` used. Overloads operator `>>`. Complexity linear in length of `str`.
 
 ```cpp
 std::ostream& operator<<(std::ostream& os, const std::string& str)

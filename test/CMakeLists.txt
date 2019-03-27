@@ -10,7 +10,6 @@ download_googletest(
 # Get all test files
 set(PROJECT_TEST_DIR ${PROJECT_SOURCE_DIR}/test)
 file(GLOB TEST_FILES 
-        ${PROJECT_TEST_DIR}/vector/*.cpp
         ${PROJECT_TEST_DIR}/string/*.cpp
 )
 

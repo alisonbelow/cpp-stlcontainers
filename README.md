@@ -7,6 +7,12 @@
 Inspired by [cplusplus-containers](https://github.com/TusharChugh/cplusplus-containers)  
 The purpose of this repository is to exercise and practice C++ programming skills by writing STL Containers.  
 
+Covered:
+
+* vector
+* std::string
+* ...
+
 ## Dependencies
 
 This project requires cmake >= 3.10 and gcc/g++ >= 6 or docker (latest or stable). If you do not wish to install the appropriate versions of cmake/gcc on your own machine, you can build, run, and test the project with the docker image. Then you must only install docker (steps below).  
