@@ -11,7 +11,7 @@ Covered:
 
 * vector
 * std::string
-* ...
+* stack
 
 ## Dependencies
 

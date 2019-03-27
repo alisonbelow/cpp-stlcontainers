@@ -9,21 +9,46 @@ download_googletest(
 
 # Get all test files
 set(PROJECT_TEST_DIR ${PROJECT_SOURCE_DIR}/test)
-file(GLOB TEST_FILES 
-        ${PROJECT_TEST_DIR}/string/*.cpp
+file(GLOB TEST_FILES_VECTOR
+    ${PROJECT_TEST_DIR}/vector/*.cpp
+)
+
+file(GLOB TEST_FILES_STRING
+    ${PROJECT_TEST_DIR}/string/*.cpp
+)
+
+file(GLOB TEST_FILES_STACK
+    ${PROJECT_TEST_DIR}/stack/*.cpp
 )
 
 # Set executables
-add_executable(cpp-stlcontainer_unittests unit_tests.cpp ${TEST_FILES})
+add_executable(cpp-stlcontainer_unittests_vector unit_tests.cpp ${TEST_FILES_VECTOR})
+add_executable(cpp-stlcontainer_unittests_string unit_tests.cpp ${TEST_FILES_STRING})
+add_executable(cpp-stlcontainer_unittests_stack unit_tests.cpp ${TEST_FILES_STACK})
 
 # Link against downloaded + generated library gtest_main
-target_link_libraries(cpp-stlcontainer_unittests gtest_main pthread)
-# target_link_libraries(cpp-stlcontainer_unittests gtest_main cpp-container pthread)  Do we need to link against main project?
+target_link_libraries(cpp-stlcontainer_unittests_vector gtest_main pthread)
+target_link_libraries(cpp-stlcontainer_unittests_string gtest_main pthread)
+target_link_libraries(cpp-stlcontainer_unittests_stack gtest_main pthread)
 
 # Add tests
 add_test(
-    NAME
+    cpp-stlcontainer_unittests_vector
     unit
     COMMAND
-    ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR/cpp-stlcontainer_unittests}
+    ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR/cpp-stlcontainer_unittests_vector}
+)
+
+add_test(
+    cpp-stlcontainer_unittests_string
+    unit
+    COMMAND
+    ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR/cpp-stlcontainer_unittests_string}
+)
+
+add_test(
+    cpp-stlcontainer_unittests_stack
+    unit
+    COMMAND
+    ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR/cpp-stlcontainer_unittests_stack}
 )
