@@ -9,7 +9,6 @@ namespace stlcontainer {
     template<class VectorDataType>
     class Vector 
     {
-        const int INITIAL_CAPACITY = 8;
     public:
         // Type definitions
         using value_type = VectorDataType;
