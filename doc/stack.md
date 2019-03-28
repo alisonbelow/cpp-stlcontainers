@@ -9,6 +9,10 @@ The underlying container must be a *SequenceContainer*, and it must provide the 
 
 Examples of containers that can be used are `std::vector`, `std::deque`, and `std::list`. The default container is `std::deque`.
 
+Stacks do not have iterators because the only element available to access is the top-most.
+
+Complexity for most stack operators are constant (*O*(1)): push(), pop(), top(), size(), and empty() all have a constant complexity.
+
 ### Member Functions
 
 #### Constructor
@@ -19,19 +23,31 @@ Examples of containers that can be used are `std::vector`, `std::deque`, and `st
 std::stack::stack() : stack(Container());
 ```
 
-(2) Copy Constructor: constructs underlying container with contents of `other`
+(2) Copy Container Constructor: constructs underlying container with contents of `cont`
 
 ```cpp
-explicit std::stack::stack(const Container& other);
+explicit std::stack::stack(const Container& cont);
 ```
 
-(3) Move Constructor: move-constructs the underlying container
+(3) Move Container Constructor: move-constructs the underlying container
 
 ```cpp
-explicit std::stack::stack(Container&& other);
+explicit std::stack::stack(Container&& cont);
 ```
 
-(4) - (7) all are Allocator based constructors that will not be covered
+(4) Copy Constructor: constructs with copy of `other`
+
+```cpp
+std::stack::stack(const Stack& other);
+```
+
+(5) Move Constructor: move-constructs stack
+
+```cpp
+std::stack::stack(stack&& other);
+```
+
+(6) - (7) all are Allocator based constructors that will not be covered
 
 #### Destructor
 
