@@ -38,7 +38,7 @@ script:
 after_success:
   - pwd
   - ls
-  - coveralls --root . -E ".*external.*" -E ".*googletest.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
+  - coveralls --root . -E ".*external.*" -E ".*googletest.*" -E ".*CMakeFiles.*"
 
 notifications:
 email: false
