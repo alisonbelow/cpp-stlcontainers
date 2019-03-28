@@ -7,6 +7,12 @@ download_googletest(
     ${PROJECT_SOURCE_DIR}/googletest
 )
 
+# Use to get code coverage
+if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+endif()
+
+
 # Get all test files
 set(PROJECT_TEST_DIR ${PROJECT_SOURCE_DIR}/test)
 file(GLOB TEST_FILES_VECTOR
