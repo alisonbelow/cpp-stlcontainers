@@ -354,72 +354,84 @@ namespace stlcontainer {
             swap(_capacity, other._capacity);
             swap(_elements, other._elements);
         }
-
-        // Non-member functions
-        bool operator== (const Vector& lhs) const
-        {
-            if (size() != lhs.size())
-            {
-                return false;
-            }
-
-            for(auto index = 0; index < size(); ++index)
-            {
-                if(_elements[index] != lhs._elements[index])
-                {
-                    return false;
-                }
-            }
-            return true;      
-        }
-
-        bool operator!= (const Vector& lhs) const
-        {
-            return !(*this == lhs);
-        }
-
-        bool operator< (const Vector& lhs) const
-        {
-            bool matchingElems = true;
-            for(auto index = 0; index < std::min(size(), lhs.size()); ++index)
-            {
-                if(_elements[index] > lhs._elements[index])
-                {
-                    return false;
-                }
-
-                matchingElems &= (_elements[index] == lhs._elements[index]);
-            }
-
-            if (matchingElems) 
-            {
-                if (lhs.size() < size())
-                {
-                    return false;
-                }    
-            }
-            return true;      
-        }
-
-        bool operator> (const Vector& lhs) const
-        {
-            return lhs < *this;
-        }
-
-        bool operator<= (const Vector& lhs) const
-        {
-            return !(lhs < *this);
-        }
-
-        bool operator>= (const Vector& lhs) const
-        {
-            return !(*this < lhs);
-        }
         
     private:
         value_type* _elements;
         size_t _count;
         size_t _capacity;
     };          
+
+    // Non-member functions
+    template<class VectorDataType> 
+    bool operator==(const Vector<VectorDataType>& lhs, const Vector<VectorDataType>& rhs)
+    {
+        if (lhs.size() != rhs.size())
+        {
+            return false;
+        }
+
+        for(auto index = 0; index < lhs.size(); ++index)
+        {
+            if (lhs[index] != rhs[index])
+            {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    template<class VectorDataType> 
+    bool operator!=(const Vector<VectorDataType>& lhs, const Vector<VectorDataType>& rhs)
+    {
+        return !(lhs == rhs);    
+    }
+
+    template<class VectorDataType> 
+    bool operator<(const Vector<VectorDataType>& lhs, const Vector<VectorDataType>& rhs)
+    {
+        bool matchingElems = true;
+        for(auto index = 0; index < std::min(lhs.size(), rhs.size()); ++index)
+        {
+            if(lhs[index] > rhs[index])
+            {
+                return false;
+            }
+
+            matchingElems &= (lhs[index] == rhs[index]);
+        }
+
+        if (matchingElems) 
+        {
+            if (lhs.size() > rhs.size())
+            {
+                return false;
+            }    
+        }
+        return true;      
+    }
+
+    template<class VectorDataType> 
+    bool operator>(const Vector<VectorDataType>& lhs, const Vector<VectorDataType>& rhs)
+    {
+        return rhs < lhs;
+    }
+
+    template<class VectorDataType> 
+    bool operator<=(const Vector<VectorDataType>& lhs, const Vector<VectorDataType>& rhs)
+    {
+        return !(rhs < lhs);
+    }
+
+    template<class VectorDataType> 
+    bool operator>=(const Vector<VectorDataType>& lhs, const Vector<VectorDataType>& rhs)
+    {
+        return !(lhs < rhs);
+    }
+
+    template<class VectorDataType> 
+    void swap(Vector<VectorDataType>& lhs, Vector<VectorDataType>& rhs) noexcept
+    {
+        lhs.swap(rhs);
+    }
 
 } // namespace stlcontainer

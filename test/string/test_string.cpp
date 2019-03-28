@@ -966,15 +966,65 @@ TEST(STRING, SWAP)
 // ------------------------------------------------------------------
 // Non-Member Functions
 // ------------------------------------------------------------------
-// TEST(STRING, CONCATENATION_OPERATOR)
-// {
+TEST(STRING, CONCATENATION_OPERATOR)
+{
+    stlcontainer::String s1("string");
+    stlcontainer::String s2("!");
 
-// }
+    auto s = s1 + s2;
 
-// TEST(STRING, STRSWAP)
-// {
+    std::string sCompare1("string");
+    std::string sCompare2("!");
 
-// }
+    auto sCompare = sCompare1 + sCompare2;
+
+    ASSERT_EQ(s.size(), sCompare.size());
+    for(auto index = 0; index < s.size(); ++index)
+    {
+        ASSERT_EQ(s[index], sCompare[index]);
+    }
+
+    s = s + "!";
+    sCompare = sCompare + "!";
+
+    ASSERT_EQ(s.size(), sCompare.size());
+    for(auto index = 0; index < s.size(); ++index)
+    {
+        ASSERT_EQ(s[index], sCompare[index]);
+    }
+
+    s = s + 'a';
+    sCompare = sCompare + 'a';
+
+    ASSERT_EQ(s.size(), sCompare.size());
+    for(auto index = 0; index < s.size(); ++index)
+    {
+        ASSERT_EQ(s[index], sCompare[index]);
+    }
+}
+
+TEST(STRING, STRSWAP)
+{
+    stlcontainer::String s1("stringone");
+    stlcontainer::String s2("stringtwo");
+    std::string sCompare1("stringone");
+    std::string sCompare2("stringtwo");
+
+    stlcontainer::swap(s1, s2);
+    std::swap(sCompare1, sCompare2);
+
+    ASSERT_TRUE(s1.size() == sCompare1.size());
+    for(auto index = 0; index < s1.size(); ++index)
+    {
+        ASSERT_EQ(s1[index], sCompare1[index]);
+    }
+
+    ASSERT_TRUE(s2.size() == sCompare2.size());
+    for(auto index = 0; index < s2.size(); ++index)
+    {
+        ASSERT_EQ(s2[index], sCompare2[index]);
+    }
+}
 
 // TEST(STRING, STRERASE)
 // {

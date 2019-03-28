@@ -485,6 +485,15 @@ Complexity for `!=` is constant if `rhs` and `lhs` `size` differs. Complexity is
 
 Complexity for remaining operators is linear up to the smaller `size` between `lhs` and `rhs`.  
 
+#### std::swap 
+
+A specialization for the `std::swap` function is defined for two vectors. This is equivalent to calling `lhs.swap(rhs)`.
+
+```cpp
+template <class T, class Alloc>
+    void std::swap (const std::vector<T, Alloc>& lhs, const std::vector<T, Alloc>& rhs);
+```
+
 ### References
 
 https://en.cppreference.com/w/cpp/container/vector  

@@ -193,7 +193,7 @@ TEST(VECTOR, FRONT_AND_BACK)
 // ------------------------------------------------------------------
 // Modifiers
 // ------------------------------------------------------------------
-/*int return_zero_elem(int* elems)
+int return_zero_elem(int* elems)
 {
     return elems[0];
 }
@@ -210,45 +210,47 @@ TEST(VECTOR, CLEAR_AND_EMPTY)
     // Should seg fault
     auto elems = vec.data();
     ASSERT_EXIT(return_zero_elem(elems), ::testing::KilledBySignal(SIGSEGV), ".*");
-}*/
+}
 
 TEST(VECTOR, PUSH_BACK)
 {
     stlcontainer::Vector<int> vec;
-    std::cout << "cap = " << vec.capacity() << ", push back 3\n";
+    std::vector<int> vecCompare;
+
     vec.push_back(3);
-    std::cout << "cap = " << vec.capacity() << ", push back 5\n";
+    vecCompare.push_back(3);
+    ASSERT_EQ(vec.capacity(), vecCompare.capacity());
+    ASSERT_EQ(vec.size(), vecCompare.size());
+
     vec.push_back(5);
-    std::cout << "cap = " << vec.capacity() << ", push back 6\n";
+    vecCompare.push_back(5);
+    ASSERT_EQ(vec.capacity(), vecCompare.capacity());
+    ASSERT_EQ(vec.size(), vecCompare.size());
+    
     vec.push_back(6);
-    std::cout << "cap = " << vec.capacity() << ", push back 7\n";
+    vecCompare.push_back(6);
+    ASSERT_EQ(vec.capacity(), vecCompare.capacity());
+    ASSERT_EQ(vec.size(), vecCompare.size());
+
     vec.push_back(7);
-    std::cout << "cap = " << vec.capacity() << ", push back 1\n";
+    vecCompare.push_back(7);
+    ASSERT_EQ(vec.capacity(), vecCompare.capacity());
+    ASSERT_EQ(vec.size(), vecCompare.size());
+    
     vec.push_back(1);
-    std::cout << "cap = " << vec.capacity() << "\n";
-
-    std::vector<int> temp;
-    std::cout << "cap = " << temp.capacity() << ", push back 3\n";
-    temp.push_back(3);
-    std::cout << "cap = " << temp.capacity() << ", push back 5\n";
-    temp.push_back(5);
-    std::cout << "cap = " << temp.capacity() << ", push back 6\n";
-    temp.push_back(6);
-    std::cout << "cap = " << temp.capacity() << ", push back 7\n";
-    temp.push_back(7);
-    std::cout << "cap = " << temp.capacity() << ", push back 1\n";
-    temp.push_back(1);
-    std::cout << "cap = " << temp.capacity() << "\n";
-
-    std::vector<int> compareVec({3,5,6,7,1});
-
+    vecCompare.push_back(1);
+    ASSERT_EQ(vec.capacity(), vecCompare.capacity());
+    ASSERT_EQ(vec.size(), vecCompare.size());
+    
     for(auto index = 0; index < vec.size(); ++index)
     {
-        ASSERT_EQ(vec[index], compareVec[index]);
+        ASSERT_EQ(vec[index], vecCompare[index]);
     }
 
     ASSERT_TRUE(vec.size() == 5);
     ASSERT_TRUE(vec.capacity() > vec.size());
+    ASSERT_EQ(vec.capacity(), vecCompare.capacity());
+    ASSERT_EQ(vec.size(), vecCompare.size());
 }
 
 TEST(VECTOR, POP_BACK)
@@ -371,6 +373,30 @@ TEST(VECTOR, RELATIONALOPS)
     ASSERT_TRUE(fooCompare > barCompare);
     ASSERT_FALSE(fooCompare <= barCompare);
     ASSERT_TRUE(fooCompare >= barCompare);
+}
+
+TEST(VECTOR, NONMEMBER_SWAP)
+{
+    stlcontainer::Vector<int> vec1({3,5,6,7,1});
+    stlcontainer::Vector<int> vec2({0,5,4,2});
+
+    std::vector<int> compareVecOne({3,5,6,7,1});
+    std::vector<int> compareVecTwo({0,5,4,2});
+
+    stlcontainer::swap(vec1, vec2);
+    std::swap(compareVecOne, compareVecTwo);
+
+    ASSERT_TRUE(vec1.size() == compareVecOne.size());
+    for(auto index = 0; index < vec1.size(); ++index)
+    {
+        ASSERT_EQ(vec1[index], compareVecOne[index]);
+    }
+
+    ASSERT_TRUE(vec2.size() == compareVecTwo.size());
+    for(auto index = 0; index < vec2.size(); ++index)
+    {
+        ASSERT_EQ(vec2[index], compareVecTwo[index]);
+    }
 }
 
 // ------------------------------------------------------------------

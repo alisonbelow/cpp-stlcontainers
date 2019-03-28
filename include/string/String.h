@@ -852,82 +852,111 @@ public:
     // TODO rfind
     // TODO find_*_of variations
 
-    // Non-Member Functions: Concatenation
-    String operator+ (const String& rhs) {}
-    String operator+ (const char* rhs) {}
-    String operator+ (char rhs) {}
-
-    // Non-Member Functions: Relational Operators
-    bool operator== (const String& rhs) const
-    {
-        if (size() != rhs.size())
-        {
-            return false;
-        }
-
-        for(auto index = 0; index < size(); ++index)
-        {
-            if(_str[index] != rhs._str[index])
-            {
-                return false;
-            }
-        }
-    }
-
-    bool operator!= (const String& rhs) const
-    {
-        return !(*this == rhs);
-    }
-
-    bool operator<(const String& rhs) const 
-    {
-        bool matchingElems = true;
-        for(auto index = 0; index < std::min(size(), rhs.size()); ++index)
-        {
-            if(_str[index] > rhs._str[index])
-            {
-                return false;
-            }
-
-            matchingElems &= (_str[index] == rhs._str[index]);
-        }
-
-        if (matchingElems) 
-        {
-            if (rhs.size() < size())
-            {
-                return false;
-            }    
-        }
-        return true; 
-    }
-
-    bool operator> (const String& rhs) const
-    {
-        return rhs < *this;
-    }
-
-    bool operator<= (const String& rhs) const
-    {
-        return !(rhs < *this);
-    }
-
-    bool operator>= (const String& rhs) const
-    {
-        return !(*this < rhs);
-    }
-
-    // Non-Member Functions: Input/Output
-    friend std::ostream& operator<<(std::ostream& os, const stlcontainer::String& str)
-    {
-        os << str.c_str();
-        return os;
-    }
-
 private:
     char *_str;
     size_t _len;
     size_t _capacity;
 };
+
+// Non-Member Functions: Concatenation
+String operator+ (const String& lhs, const String& rhs) 
+{
+    String out(lhs);
+    return out.append(rhs);
+}
+
+String operator+ (const String& lhs, const char* rhs)
+{
+    String out(lhs);
+    return out.append(rhs);
+}
+
+String operator+ (const String& lhs, char rhs)
+{
+    String out(lhs);
+    out.push_back(rhs);
+    return out;
+}
+
+// Non-Member Functions: Relational Operators
+bool operator== (const String& lhs, const String& rhs)
+{
+    if (lhs.size() != rhs.size())
+    {
+        return false;
+    }
+
+    for(auto index = 0; index < lhs.size(); ++index)
+    {
+        if(lhs[index] != rhs[index])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool operator!= (const String& lhs, const String& rhs)
+{
+    return !(lhs == rhs);
+}
+
+bool operator<(const String& lhs, const String& rhs) 
+{
+    bool matchingElems = true;
+    for(auto index = 0; index < std::min(lhs.size(), rhs.size()); ++index)
+    {
+        if(lhs[index] > rhs[index])
+        {
+            return false;
+        }
+
+        matchingElems &= (lhs[index] == rhs[index]);
+    }
+
+    if (matchingElems) 
+    {
+        if (rhs.size() < lhs.size())
+        {
+            return false;
+        }    
+    }
+    return true; 
+}
+
+bool operator> (const String& lhs, const String& rhs)
+{
+    return rhs < lhs;
+}
+
+bool operator<= (const String& lhs, const String& rhs)
+{
+    return !(rhs < lhs);
+}
+
+bool operator>= (const String& lhs, const String& rhs)
+{
+    return !(lhs < rhs);
+}
+
+// Non-Member Functions: Input/Output
+std::ostream& operator<<(std::ostream& os, const stlcontainer::String& str)
+{
+    os << str.c_str();
+    return os;
+}
+
+std::ostream& operator>>(std::ostream& os, const stlcontainer::String& str)
+{
+    os >> str.c_str();
+    return os;
+}
+
+// Non-Member Functions: Swap
+void swap(String& lhs, String& rhs) noexcept
+{
+    lhs.swap(rhs);
+}
+
 
 } // namespace stlcontainer
