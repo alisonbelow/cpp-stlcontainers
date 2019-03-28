@@ -31,9 +31,13 @@ script:
   - cmake ..
   - make
   - cd ..
-  - ./build/bin/cpp-stlcontainer_unittests
+  - ./build/bin/cpp-stlcontainer_unittests_vector
+  - ./build/bin/cpp-stlcontainer_unittests_string
+  - ./build/bin/cpp-stlcontainer_unittests_stack
 
 after_success:
+  - pwd
+  - ls
   - coveralls --root . -E ".*external.*" -E ".*googletest.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
 
 notifications:
