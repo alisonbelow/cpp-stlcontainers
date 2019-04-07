@@ -20,14 +20,15 @@ function run_tests() {
     echo -e "\n*****************************************"
     echo "Running cpp-stlcontainer unit tests"
     echo -e "*****************************************"
-    ./build/bin/cpp-stlcontainer_unittests
+    echo -e "\n***** VECTOR *****"
+    ./build/bin/cpp-stlcontainer_unittests_vector
+    echo -e "\n***** STRING *****"
+    ./build/bin/cpp-stlcontainer_unittests_string
+    echo -e "\n***** STACK *****"
+    ./build/bin/cpp-stlcontainer_unittests_stack
+    echo -e "\n***** QUEUE *****"
+    ./build/bin/cpp-stlcontainer_unittests_queue
 }
-
-# Run main executable
-# function run() {
-#     echo "Running cpp-stlcontainer"
-#     ./build/bin/cpp-container
-# }
 
 # If user entry './project.sh build'
 if [ "$1" == "build" ]
@@ -43,12 +44,3 @@ then
     run_tests
     exit
 fi
-
-# If user entry './project.sh run'
-# if [ "$1" == "run" ]
-# then
-    # build
-    # run_tests
-    # run
-    # exit
-# fi

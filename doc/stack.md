@@ -1,6 +1,6 @@
 ## Stack
 
-The stack class is a container adapater that provides a LIFO (Last In, First Out) data structure to use. The stack is a wrapper around whatever container is underlying. Operations are limited for std::stack.  
+The stack class is a **container adapter** that provides a LIFO (Last In, First Out) data structure to use. The stack is a wrapper around whatever container is underlying. Operations are limited for std::stack.  
 
 The underlying container must be a *SequenceContainer*, and it must provide the following functions:
 * back()

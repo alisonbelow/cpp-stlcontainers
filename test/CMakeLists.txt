@@ -27,15 +27,21 @@ file(GLOB TEST_FILES_STACK
     ${PROJECT_TEST_DIR}/stack/*.cpp
 )
 
+file(GLOB TEST_FILES_QUEUE
+    ${PROJECT_TEST_DIR}/queue/*.cpp
+)
+
 # Set executables
 add_executable(cpp-stlcontainer_unittests_vector unit_tests.cpp ${TEST_FILES_VECTOR})
 add_executable(cpp-stlcontainer_unittests_string unit_tests.cpp ${TEST_FILES_STRING})
 add_executable(cpp-stlcontainer_unittests_stack unit_tests.cpp ${TEST_FILES_STACK})
+add_executable(cpp-stlcontainer_unittests_queue unit_tests.cpp ${TEST_FILES_QUEUE})
 
 # Link against downloaded + generated library gtest_main
 target_link_libraries(cpp-stlcontainer_unittests_vector gtest_main pthread)
 target_link_libraries(cpp-stlcontainer_unittests_string gtest_main pthread)
 target_link_libraries(cpp-stlcontainer_unittests_stack gtest_main pthread)
+target_link_libraries(cpp-stlcontainer_unittests_queue gtest_main pthread)
 
 # Add tests
 add_test(
@@ -57,4 +63,11 @@ add_test(
     unit
     COMMAND
     ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR/cpp-stlcontainer_unittests_stack}
+)
+
+add_test(
+    cpp-stlcontainer_unittests_queue
+    unit
+    COMMAND
+    ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR/cpp-stlcontainer_unittests_queue}
 )

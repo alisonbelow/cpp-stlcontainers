@@ -36,8 +36,6 @@ script:
   - ./build/bin/cpp-stlcontainer_unittests_stack
 
 after_success:
-  - pwd
-  - ls
   - coveralls --root . -E ".*external.*" -E ".*googletest.*" -E ".*CMakeFiles.*"
 
 notifications:
