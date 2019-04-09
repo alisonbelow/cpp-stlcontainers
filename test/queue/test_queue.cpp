@@ -1,7 +1,6 @@
 #include <deque>
 #include <list>
 #include <queue>
-#include <vector>
 
 #include <gtest/gtest.h>
 #include "queue/Queue.h"
