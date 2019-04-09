@@ -34,6 +34,8 @@ script:
   - ./build/bin/cpp-stlcontainer_unittests_vector
   - ./build/bin/cpp-stlcontainer_unittests_string
   - ./build/bin/cpp-stlcontainer_unittests_stack
+  - ./build/bin/cpp-stlcontainer_unittests_queue
+  - ./build/bin/cpp-stlcontainer_unittests_forwardlist
 
 after_success:
   - coveralls --root . -E ".*external.*" -E ".*googletest.*" -E ".*CMakeFiles.*"
