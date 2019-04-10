@@ -325,6 +325,10 @@ public:
                 ++eraseIter;
             }
         }
+        if (curr_size == count) 
+        {
+            return;
+        }
 
         if (curr_size > count)
         {
@@ -341,7 +345,7 @@ public:
             }  
         }
     }
-    
+
     void swap(ForwardList& other) noexcept
     {
         using std::swap;
@@ -349,7 +353,106 @@ public:
         swap(_tail, other._tail);
     }
 
-    // Non-Member Functions: Relational Operators declaration
+    // Member Functions: Operations
+    
+    void merge(ForwardList& other) 
+    {
+        auto iter = begin();
+        auto otherIter = other.begin();
+        auto traverse_node = make_node(ListDataType{}, nullptr);
+        auto new_head = traverse_node;
+
+        size_t count = 0;
+        while (iter != end() && otherIter != other.end())
+        {
+            if (*iter <= *otherIter)
+            {
+                traverse_node->_next = iter._pointee;
+                ++iter;
+            } else {
+                traverse_node->_next = otherIter._pointee;
+                ++otherIter;
+            }
+            ++count;
+            traverse_node = traverse_node->_next;
+        }
+
+        while (iter != end())
+        {
+            traverse_node->_next = iter._pointee;
+            ++iter;
+            traverse_node = traverse_node->_next;
+        }
+
+        while (otherIter != other.end())
+        {
+            traverse_node->_next = otherIter._pointee;
+            ++otherIter;
+            traverse_node = traverse_node->_next;
+        }
+        _head = new_head->_next;
+    }
+
+    // TODO void merge(ForwardList&& other) {}
+    // TODO void splice_after(const_iterator pos, ForwardList& other) {}
+    // TODO void splice_after(const_iterator pos, ForwardList&& other) {}
+    // TODO void splice_after(const_iterator pos, ForwardList& other, const_iterator it) {}
+    // TODO void splice_after(const_iterator pos, ForwardList&& other, const_iterator it) {}
+    // TODO void splice_after(const_iterator pos, ForwardList& other, const_iterator first, const_iterator last) {}
+    // TODO void splice_after(const_iterator pos, ForwardList&& other, const_iterator first, const_iterator last) {}
+    
+    void remove(const ListDataType& value) 
+    {
+        auto traverse_node = begin();
+        while (traverse_node != end())
+        {
+            if (traverse_node._pointee->_next->_value == value)
+            {
+                erase_after(traverse_node);
+            }
+            ++traverse_node; 
+        }
+    }
+
+    void reverse() noexcept 
+    {
+        auto prev_node = make_node(ListDataType{}, nullptr); 
+        auto curr_node = _head; 
+        auto next_node = make_node(ListDataType{}, nullptr);
+        while (curr_node->_next != nullptr)
+        {
+            next_node = curr_node->_next;
+            curr_node->_next = prev_node;
+            prev_node = curr_node;
+            curr_node = next_node;
+        }
+        _head = prev_node;
+    }
+    
+    void unique()
+    {
+        auto curr_node = _head->_next;
+        auto prev_node = _head;
+        auto next_node = _head;
+
+        while (prev_node != _tail)
+        {
+            next_node = curr_node->_next;
+            if (prev_node->_value == curr_node->_value)
+            {
+                // Remove curr_node
+                delete curr_node;
+                prev_node->_next = next_node;    
+            } else {
+                prev_node = curr_node;
+            }
+            curr_node = next_node;
+        }
+    }
+
+    // TODO void sort() {}
+
+    // Non-Member Functions: Relational operators, swap declaration
     template<class myListDataType> 
     friend bool operator==(const ForwardList<myListDataType>& lhs, const ForwardList<myListDataType>& rhs);
 
@@ -368,6 +471,9 @@ public:
     template<class myListDataType> 
     friend bool operator>=(const ForwardList<myListDataType>& lhs, const ForwardList<myListDataType>& rhs);
 
+    template<class myListDataType> 
+    friend void swap(ForwardList<myListDataType>& lhs, ForwardList<myListDataType>& rhs) noexcept;
+
 private:
     node_pointer _head;
     node_pointer _tail;
@@ -379,5 +485,13 @@ private:
 };
 
 // Non-Member Functions
+
+// TODO relational operators
+
+template <class ListDataType>
+void swap(ForwardList<ListDataType>& lhs, ForwardList<ListDataType>& rhs) noexcept
+{
+    lhs.swap(rhs);
+}
 
 } // namespace stlcontainer

@@ -240,12 +240,77 @@ void std::forward_list::swap(forward_list other&);
 ```
 
 ### Member Functions: Operations
+
 #### std::forward_list::merge
-#### std::forward_list::splice_after
+
+Merges two sorted lists (`this` and `other`) into one, in ascending order. If second version of `merge` is used, the comparison `Compare` function object. For equivalent elems, elems from `this`, will precede those from `other`. Complexity is at most `std::distance(begin(), end()) + std::distance(other.begin(), other.()) - 1`. Compare version not covered.
+
+```cpp
+void std::forward_list::merge(forward_list& other);
+void std::forward_list::merge(forward_list&& other);
+template <class Compare> void std::forward_list::merge(forward_list& other, Compare comp);
+template <class Compare> void std::forward_list::merge(forward_list&& other, Compare comp);
+```
+
+#### std::forward_list::splice_after, not covered
+
+Moves elems from `other` forward_list to `*this`. No elements are copied. Iterators of moved elems not invalidated, just refer to `*this` now.
+
+(1) Move all elems from `other` into `*this`, inserted after element pointed to by `pos`. `other` is empty after function call. Complexity linear in size of `other`
+
+```cpp
+void std::forward_list::splice_after(const_iterator pos, forward_list& other);
+void std::forward_list::splice_after(const_iterator pos, forward_list&& other);
+```
+
+(2) Moves elem pointed by iterator following `it` into `*this`. Complexity is constant.
+
+```cpp
+void std::forward_list::splice_after(const_iterator pos, forward_list& other, const_iterator it);
+void std::forward_list::splice_after(const_iterator pos, forward_list&& other, const_iterator it);
+```
+
+(3) Moves the elems in range (first, last) from `other` into `*this`, inserted after elem pointed to by `pos`. Complexity is linear in `std::distance(first, last)`.
+
+```cpp
+void std::forward_list::splice_after(const_iterator pos, forward_list& other, const_iterator first, const_iterator last);
+void std::forward_list::splice_after(const_iterator pos, forward_list&& other, const_iterator first, const_iterator last);
+```
+
 #### std::forward_list::remove, remove_if
+
+Removes all elements satisfying criteria. Returns number of elem removed from C++. Complexity is linear in size of container.
+
+```cpp
+void std::forward_list::remove(const T& value); /* -> (C++20) ->*/ size_type std::forward_list::remove(const T& value);
+template<class UnaryPredicate> void std::forward_list::remove_if(UnaryPredicate p); /* -> (C++20) ->*/ template<class UnaryPredicate> size_type std::forward_list::remove_if(UnaryPredicate p);
+```
+
 #### std::forward_list::reverse
+
+Reverses order of elements in container. Complexity is linear in size of the container. 
+
+```cpp
+void std::forward_list::reverse() noexcept;
+```
+
 #### std::forward_list::unique
+
+Removes all consecutive duplicate elems from the container. Only first elem in each group of equal elems is left. Can either use `==` or given binary predicate `p` to sort. Since C++20 returns num of elems removed. Complexity linear in size of container.
+
+```cpp
+void std::forward_list::unique(); /*-> (C++20) ->*/ size_type unique();
+template <class BinaryPredicate> void std::forward_list::unique(BinaryPredicate p); /*-> (C++20) ->*/ template <class BinaryPredicate> size_type std::forward_list::unique(BinaryPredicate p);
+```
+
 #### std::forward_list::sort
+
+Sorts elems in ascending order, or compares elems to sort using `comp`. Order of equal elems preserved. Complexity has approximately n*log(n) comparisons. Cannot use `std::sort` because that necessitates random access iterators. Compare version not covered.
+
+```cpp
+void std::forward_list::sort();
+template <class Compare> void std::forward_list::sort(Compare comp);
+```
 
 ### Non-Member Functions: swap
 

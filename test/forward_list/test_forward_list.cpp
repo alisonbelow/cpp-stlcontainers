@@ -408,3 +408,140 @@ TEST(FORWARD_LIST, SWAP)
     ASSERT_EQ(size, 4);
 }
 
+TEST(FORWARD_LIST, MERGE)
+{
+    stlcontainer::ForwardList<int> list1 = {0,3,5,6};
+    stlcontainer::ForwardList<int> list2 = {1,2,3,7,9,9,9};
+    std::forward_list<int> list1Compare = {0,3,5,6};
+    std::forward_list<int> list2Compare = {1,2,3,7,9,9,9};
+    list1.merge(list2);
+    list1Compare.merge(list2Compare);
+
+    auto compareIter = list1Compare.begin();
+    auto iter = list1.begin();
+    auto size = 0;
+    while(compareIter != list1Compare.end())
+    {
+        EXPECT_EQ(*iter, *compareIter);
+        ++iter;
+        ++compareIter;
+        ++size;
+    }
+    ASSERT_EQ(size, 11);
+}
+
+TEST(FORWARD_LIST, REMOVE)
+{
+    stlcontainer::ForwardList<int> list = {1,9,2,3,7,9,0,9};
+    std::forward_list<int> listCompare = {1,9,2,3,7,9,0,9};
+    
+    list.remove(9);
+    listCompare.remove(9);
+    
+    auto compareIter = listCompare.begin();
+    auto iter = list.begin();
+    auto size = 0;
+    while(compareIter != listCompare.end())
+    {
+        EXPECT_EQ(*iter, *compareIter);
+        ++iter;
+        ++compareIter;
+        ++size;
+    }
+    ASSERT_EQ(size, 5);
+}
+
+TEST(FORWARD_LIST, REVERSE)
+{
+    stlcontainer::ForwardList<int> list = {1,9,2,3,7,9,0,9};
+    std::forward_list<int> listCompare = {1,9,2,3,7,9,0,9};
+
+    list.reverse();
+    listCompare.reverse();
+
+    auto compareIter = listCompare.begin();
+    auto iter = list.begin();
+    auto size = 0;
+    while(compareIter != listCompare.end())
+    {
+        EXPECT_EQ(*iter, *compareIter);
+        ++iter;
+        ++compareIter;
+        ++size;
+    }
+    ASSERT_EQ(size, 8);
+}
+
+TEST(FORWARD_LIST, UNIQUE)
+{
+    stlcontainer::ForwardList<int> list = {1,9,9,9,0,1,1,0,9};
+    std::forward_list<int> listCompare = {1,9,9,9,0,1,1,0,9};
+
+    list.unique();
+    listCompare.unique();
+
+    auto compareIter = listCompare.begin();
+    auto iter = list.begin();
+    auto size = 0;
+    while(compareIter != listCompare.end())
+    {
+        EXPECT_EQ(*iter, *compareIter);
+        ++iter;
+        ++compareIter;
+        ++size;
+    }
+    ASSERT_EQ(size, 6);
+
+    list = {3,4,4,5,1,6,6,6};
+    listCompare = {3,4,4,5,1,6,6,6};
+    list.unique();
+    listCompare.unique();
+
+    compareIter = listCompare.begin();
+    iter = list.begin();
+    size = 0;
+    while(compareIter != listCompare.end())
+    {
+        EXPECT_EQ(*iter, *compareIter);
+        ++iter;
+        ++compareIter;
+        ++size;
+    }
+    ASSERT_EQ(size, 5);
+}
+
+TEST(FORWARD_LIST, SWAP_NM)
+{
+    stlcontainer::ForwardList<int> list1 = {9,3,4,5};
+    stlcontainer::ForwardList<int> list2 = {0,0};
+
+    std::forward_list<int> listCompare1 = {9,3,4,5};
+    std::forward_list<int> listCompare2 = {0,0};
+
+    stlcontainer::swap(list1,list2);
+    std::swap(listCompare1, listCompare2);
+
+    auto compareIter = listCompare1.begin();
+    auto iter = list1.begin();
+    auto size = 0;
+    while(compareIter != listCompare1.end())
+    {
+        ASSERT_EQ(*iter, *compareIter);
+        ++iter;
+        ++compareIter;
+        ++size;
+    }
+    ASSERT_EQ(size, 2);
+
+    compareIter = listCompare2.begin();
+    iter = list2.begin();
+    size = 0;
+    while(compareIter != listCompare1.end())
+    {
+        ASSERT_EQ(*iter, *compareIter);
+        ++iter;
+        ++compareIter;
+        ++size;
+    }
+    ASSERT_EQ(size, 4);
+}
